@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+baseline.json
+baseline.json.tmp
+fim_events.log
+*.log
