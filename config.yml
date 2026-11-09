@@ -1,0 +1,7 @@
+paths:
+  - "/etc/passwd"
+  - "/root/monitored_dir"
+poll_interval: 5
+siem_syslog_host: "192.168.20.10"
+siem_syslog_port: 514
+hostname: "kali-vm"
