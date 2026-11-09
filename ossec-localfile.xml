@@ -1,0 +1,10 @@
+<!--
+  Paste this localfile block inside the existing <ossec_config> element of
+  the Kali Wazuh agent file /var/ossec/etc/ossec.conf.
+  <location> must be the absolute path of monitor.log_file from config.yaml.
+  The example below matches a checkout at /home/kali/custom-python-fim.
+-->
+<localfile>
+  <log_format>json</log_format>
+  <location>/home/kali/custom-python-fim/fim_events.log</location>
+</localfile>
