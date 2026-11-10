@@ -1,4 +1,5 @@
-# Custom Python FIM and Wazuh lab
+# Custom Python FIM and Wazuh lab (made by ai for friend)
+
 File integrity monitor for the month-7 lab. It hashes configured files with SHA-256, writes one JSON event per line, and leaves collection to the Wazuh agent on Kali.
 ## Lab network
 | Segment | Network | Host | Address |
