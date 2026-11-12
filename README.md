@@ -270,38 +270,6 @@ docker inspect --format '{{.State.Health.Status}}' wazuh-fim-telegram
 
 More in [`docs/deployment.md`](docs/deployment.md).
 
-## Project layout
-
-```
-wazuh-fim-telegram/
-├── src/wazuh_fim_telegram/   # the Python package
-│   ├── __main__.py           # entry: python -m wazuh_fim_telegram
-│   ├── cli.py                # argparse CLI
-│   ├── config.py             # pydantic-settings Settings
-│   ├── logging_setup.py      # structlog JSON logging + request_id
-│   ├── models.py             # FimEvent + Severity + parse_many
-│   ├── wazuh_client.py       # async Wazuh API client (JWT + basic)
-│   ├── rules.py              # YAML rule engine
-│   ├── state.py              # SQLite state store
-│   ├── notifier.py           # Telegram message formatting + send
-│   ├── digest.py             # APScheduler daily digest
-│   └── bot.py                # FimBot: poller + python-telegram-bot
-├── scripts/                  # bash entrypoints
-│   ├── fim-watcher.sh        # main wrapper (Docker CMD / systemd ExecStart)
-│   ├── send-test-alert.sh    # synthetic alert smoke test
-│   └── healthcheck.sh        # Docker HEALTHCHECK probe
-├── config/
-│   └── rules.example.yaml    # example rules file
-├── tests/                    # pytest suite
-├── docs/                     # architecture + deployment docs
-├── .github/workflows/        # CI + CodeQL
-├── Dockerfile                # multi-stage, non-root, tini
-├── docker-compose.yml
-├── pyproject.toml            # deps + tool config (ruff, mypy, pytest)
-├── Makefile                  # dev shortcuts
-└── README.md
-```
-
 ## Contributing
 
 PRs welcome. Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) first — keep PRs
