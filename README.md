@@ -67,30 +67,6 @@ the simplest reliable way to get Wazuh FIM events onto your phone.
 
 ## How it works
 
-```
-            ┌─────────────────┐     JWT / basic auth
-            │  Wazuh manager  │ ◄──────────────────────┐
-            │   REST API      │                        │
-            └────────┬────────┘                        │
-                     │  GET /events?rule.groups=syscheck (or /syscheck/{agent})
-                     ▼                                  │
-   ┌──────────────────────────────────────┐             │
-   │       wazuh-fim-telegram             │             │
-   │                                      │             │
-   │  WazuhClient ──► models.FimEvent ──► │             │
-   │  RuleEngine ──► State (SQLite) ──►   │             │
-   │  Notifier  ──────────────────────────┼─────────────┤
-   │                                      │             │
-   │  Telegram bot (long polling)         │             │
-   │  Digest scheduler (APScheduler cron) │             │
-   └──────────────┬───────────────────────┘             │
-                  │                                      │
-                  ▼ sendMessage                          │
-            ┌─────────────────┐                         │
-            │   Telegram      │                         │
-            │   chat/channel  │                         │
-            └─────────────────┘
-```
 
 See [`docs/architecture.md`](docs/architecture.md) for a deeper walkthrough.
 
