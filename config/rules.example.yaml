@@ -1,0 +1,54 @@
+# ---------------------------------------------------------------------------
+# Wazuh FIM → Telegram — example rules file.
+# Copy to config/rules.yaml and customize. Rules are evaluated top-to-bottom;
+# the first match wins. The default action when no rule matches is `pass`.
+#
+# Actions:
+#   drop   silently discard the event (don't store, don't forward)
+#   pass   store + forward to Telegram (default)
+#   mute   like pass but skip forwarding (still stored in state for /alerts)
+#
+# Match conditions (all AND-ed within a single rule):
+#   path_regex   regex applied to the file path (re.search semantics)
+#   rule_id      Wazuh rule ID (string) or list of IDs
+#   severity     one of: critical high medium low info unknown (or list)
+#   agent_id     agent ID (string) or list
+#   action       one of: added modified deleted (or list)
+#
+# `route_to_chat` (optional, only with `pass`) overrides the default chat.
+# ---------------------------------------------------------------------------
+
+rules:
+  # Drop noisy temp/log rotations outright. These should never page anyone.
+  - name: drop-tmp
+    action: drop
+    match:
+      path_regex: '^/(tmp|var/tmp)/'
+
+  - name: drop-log-rotations
+    action: drop
+    match:
+      path_regex: '^/var/log/.*\.(1|gz|bz2| rotated)$'
+
+  # Mute (store, don't page) frequent-but-low-value changes under /var/lib.
+  - name: mute-var-lib
+    action: mute
+    match:
+      path_regex: '^/var/lib/'
+      severity: [low, info]
+
+  # Anything high or critical under /etc, /usr, /bin, /sbin → default chat
+  # AND a dedicated security channel. (Replace the chat id with your own.)
+  - name: route-critical-system-paths
+    action: pass
+    match:
+      severity: [high, critical]
+      path_regex: '^/(etc|usr|bin|sbin|lib|lib64)/'
+    # route_to_chat: "-1001234567890"
+
+  # Catch-all: pass everything else.
+  # (implicit — listed here for documentation purposes)
+  - name: default-pass
+    action: pass
+    match:
+      path_regex: '.*'

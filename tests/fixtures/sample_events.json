@@ -1,0 +1,76 @@
+[
+  {
+    "id": "evt-001",
+    "timestamp": "2025-11-12T08:00:00Z",
+    "rule": {
+      "id": "550",
+      "level": 7,
+      "description": "File modified: /etc/passwd",
+      "groups": ["syscheck", "rootcheck"]
+    },
+    "agent": {"id": "001", "name": "web-01"},
+    "data": {
+      "path": "/etc/passwd",
+      "before": {"hash": "aabbcc", "perm": "0644", "owner": "root", "size": 1234},
+      "after":  {"hash": "ddeeff", "perm": "0640", "owner": "root", "size": 1300}
+    }
+  },
+  {
+    "id": "evt-002",
+    "timestamp": "2025-11-12T08:05:00Z",
+    "rule": {
+      "id": "553",
+      "level": 5,
+      "description": "File added: /opt/app/config.yaml",
+      "groups": ["syscheck"]
+    },
+    "agent": {"id": "001", "name": "web-01"},
+    "data": {
+      "path": "/opt/app/config.yaml",
+      "after": {"hash": "112233", "perm": "0640", "owner": "app", "size": 512}
+    }
+  },
+  {
+    "id": "evt-003",
+    "timestamp": "2025-11-12T08:10:00Z",
+    "rule": {
+      "id": "554",
+      "level": 10,
+      "description": "File deleted: /etc/sudoers",
+      "groups": ["syscheck"]
+    },
+    "agent": {"id": "002", "name": "db-01"},
+    "data": {
+      "path": "/etc/sudoers",
+      "before": {"hash": "deadbeef", "perm": "0440", "owner": "root", "size": 800}
+    }
+  },
+  {
+    "id": "evt-004",
+    "timestamp": "2025-11-12T08:15:00Z",
+    "rule": {
+      "id": "560",
+      "level": 3,
+      "description": "File modified: /tmp/junk.log",
+      "groups": ["syscheck"]
+    },
+    "agent": {"id": "001", "name": "web-01"},
+    "data": {
+      "path": "/tmp/junk.log",
+      "before": {"hash": "old", "size": 10},
+      "after":  {"hash": "new", "size": 20}
+    }
+  },
+  {
+    "id": "evt-005",
+    "timestamp": "2025-11-12T08:20:00Z",
+    "rule": {
+      "id": "100",
+      "level": 3,
+      "description": "Not a FIM event (no syscheck group)",
+      "groups": ["auth"]
+    },
+    "agent": {"id": "001", "name": "web-01"},
+    "data": {"path": "/irrelevant"}
+  }
+]

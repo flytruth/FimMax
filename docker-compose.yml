@@ -1,0 +1,40 @@
+# docker-compose.yml — wazuh-fim-telegram
+#
+# Single-service deployment. Reads all configuration from .env.
+# Mount the state volume so mute lists and last-seen cursors survive restarts.
+
+services:
+  wazuh-fim-telegram:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: wazuh-fim-telegram:latest
+    container_name: wazuh-fim-telegram
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Compose-level overrides (these win over .env).
+      STATE_PATH: /var/lib/wazuh-fim-telegram/state.sqlite
+    volumes:
+      - fim-state:/var/lib/wazuh-fim-telegram
+      # Optional: mount your own rules file.
+      - ./config/rules.yaml:/app/config/rules.yaml:ro
+    networks:
+      - fim-net
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 256M
+        reservations:
+          cpus: "0.10"
+          memory: 64M
+
+volumes:
+  fim-state:
+    driver: local
+
+networks:
+  fim-net:
+    driver: bridge
