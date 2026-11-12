@@ -1,4 +1,4 @@
-# wazuh-fim-telegram
+# FimMax
 
 > Forward **Wazuh File Integrity Monitoring** alerts to **Telegram**, with an
 > interactive bot, a daily digest, structured JSON logging and Docker
