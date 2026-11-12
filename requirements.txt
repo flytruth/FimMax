@@ -1,0 +1,10 @@
+# Runtime dependencies are managed via pyproject.toml.
+# This file is kept for environments / Docker images that install from
+# requirements.txt directly. It is regenerated from pyproject.toml.
+httpx>=0.27,<0.30
+python-telegram-bot>=20.7,<22.0
+pydantic>=2.6,<3.0
+pydantic-settings>=2.2,<3.0
+PyYAML>=6.0,<7.0
+structlog>=24.1,<26.0
+APScheduler>=3.10,<4.0
